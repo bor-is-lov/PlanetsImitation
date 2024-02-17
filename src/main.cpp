@@ -58,7 +58,7 @@ int main(void) {
 	const size_t POSITIONS_SIZE = RegularPoly::GetPositionsSize(planets, SIZE);
 	// (As I understand) I can't pass dynamic array to OpenGL buffer, so I have to allocate like this:
 	Position2D* positions = (Position2D*)alloca(sizeof(Position2D) * POSITIONS_SIZE);
-	RegularPoly::MakePositionsArray(positions, planets, SIZE);
+	RegularPoly::SetPositionsArray(positions, planets, SIZE);
 
 	// OpenGL part
 	unsigned int buffer;
@@ -91,7 +91,7 @@ int main(void) {
 		planets[2].Rotate(planets[0].GetCenter(), 0.0001f);
 		planets[2].Rotate(planets[1].GetCenter(), -0.0007f);
 
-		RegularPoly::MakePositionsArray(positions, planets, SIZE);
+		RegularPoly::SetPositionsArray(positions, planets, SIZE);
 		glBufferData(GL_ARRAY_BUFFER, POSITIONS_SIZE * sizeof(Position2D), positions, GL_DYNAMIC_DRAW);
 
 		glfwSwapBuffers(window);
