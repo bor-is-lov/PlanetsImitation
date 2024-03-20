@@ -21,6 +21,7 @@ int main(void) {
 		return 2;
 	}
 	glfwMakeContextCurrent(window);
+	glfwSwapInterval(1); // Enable vsync
 	unsigned int err = glewInit();
 	if (err != GLEW_OK) {
 		std::cout << "GLEW Error: " << glewGetErrorString(err) << '\n';
@@ -79,17 +80,17 @@ int main(void) {
 		// I know it's wrong to rotate these while rendering, but I just didn't learned yet how to do it else
 		// TODO: move rotation from here to game loop
 
-		planets[0].Rotate(-0.0001f);
+		planets[0].Rotate(-0.005f);
 
 		// rotation around planets[0]
-		planets[1].Rotate(planets[0].GetCenter(), 0.0001f);
+		planets[1].Rotate(planets[0].GetCenter(), 0.005f);
 		// rotation around itself
-		planets[1].Rotate(0.0005f);
+		planets[1].Rotate(0.01f);
 
 		// to rotate arond planets[1], it first has to rotate
 		// around planets[0] the smae way as planets[1] do
-		planets[2].Rotate(planets[0].GetCenter(), 0.0001f);
-		planets[2].Rotate(planets[1].GetCenter(), -0.0007f);
+		planets[2].Rotate(planets[0].GetCenter(), 0.005f);
+		planets[2].Rotate(planets[1].GetCenter(), -0.035f);
 
 		RegularPoly::SetPositionsArray(positions, planets, SIZE);
 		glBufferData(GL_ARRAY_BUFFER, POSITIONS_SIZE * sizeof(Position2D), positions, GL_DYNAMIC_DRAW);
